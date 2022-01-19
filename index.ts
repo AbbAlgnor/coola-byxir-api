@@ -6,6 +6,8 @@ import path from "path";
 const app: Application = express();
 const port = 3000;
 
+var exec = require("child_process").exec;
+
 // Body parsing Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -17,6 +19,14 @@ app.use(express.static("coola-byxorna"));
 app.get("/", async (req: Request, res: Response): Promise<Response> => {
   return res.status(200).send({});
 });
+
+app.get(
+  "/update_web_from_git",
+  async (req: Request, res: Response): Promise<Response> => {
+    exec("git pull");
+    return res.status(200).send({});
+  }
+);
 
 try {
   app.listen(port, (): void => {

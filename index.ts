@@ -1,6 +1,7 @@
 import express, { Application, Request, Response } from "express";
 import api from "./api/api";
 import cors from "cors";
+import path from "path";
 
 const app: Application = express();
 const port = 3000;
@@ -11,11 +12,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use("/api", api);
 
+app.use(express.static("coola-byxorna"));
+
 app.get("/", async (req: Request, res: Response): Promise<Response> => {
   return res.status(200).send({});
-});
-app.get("/vote", async (req: Request, res: Response): Promise<Response> => {
-  return res.status(200).sendFile(path.join(__dirname, ".;
 });
 
 try {
